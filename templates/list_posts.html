@@ -1,0 +1,28 @@
+{% for post in posts %}
+        <div class="card my-3">
+            <div class="card-body">
+                <div class="row">
+                    <h4 class="card-title col-sm-10">
+                        {{post.title}}
+                    </h4>
+                    {% if session['username'] == post.user.username %}
+                    <div class="col-sm-2" style="text-align: right">
+                        <a href="/feedback/{{post.id}}/update" class="btn btn-secondary ">
+                            <i class="bi bi-pencil-fill"></i>
+                        </a>
+                        <form action="/feedback/{{post.id}}/delete" method='POST' style="text-align: right; display: inline">
+                                <button class="btn btn-sm btn-danger">
+                                    <i class="bi bi-trash3-fill"></i>
+                                </button>
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+                <p class="card-subtitle mb-2 text-muted">{{post.user.username}}</p>
+                <p class="card-text">
+                    {{post.content}}
+                </p>
+                
+            </div>
+        </div>
+    {% endfor %}

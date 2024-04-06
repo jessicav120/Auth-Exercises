@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class='row'>
+</div>
+<form action="/users/{{user.username}}/delete" method='POST'>
+    <h2 class="display-4">{{user.username}}
+        {% if session['username'] == user.username %}
+        <button class="btn btn-outline-danger">
+            <i class="bi bi-person-x" style="font-size: 1rem"></i>
+        </button> 
+        {% endif %}
+    </h2>
+</form>
+<p class="lead">
+    {{user.first_name}} {{user.last_name}} | {{user.email}}
+</p>
+
+
+{% if session['username'] == user.username %}
+<a href="/users/{{user.username}}/feedback/add" class="btn btn-outline-primary">
+    <i class="bi bi-plus-circle-fill" style="font-style: normal; font-size: 1.5em"> GIVE FEEDBACK</i> 
+</a>
+{% endif %}
+<hr>
+<div>
+    {% include 'list_posts.html'%}
+</div>
+{% endblock %}
